@@ -1,4 +1,4 @@
 FROM mysql:5.7
 
 COPY ./init/ /docker-entrypoint-initdb.d/
-COPY ./resources /data.sql/
+COPY ./data.sql/ /docker-entrypoint-initdb.d/
