@@ -1,3 +1,9 @@
 FROM mysql:5.7
 
+ENV MYSQL_ROOT_PASSWORD 123
+ENV MYSQL_DATABASE recipe
+ENV MYSQL_USERS test-user
+ENV MYSQL_PASSWORD 1234
+
 COPY ./init/ /docker-entrypoint-initdb.d/
+EXPOSE 3306
