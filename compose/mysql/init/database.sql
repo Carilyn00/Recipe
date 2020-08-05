@@ -29,11 +29,11 @@ CREATE TABLE  `comment` (
 );
 
 CREATE TABLE  `ingredient` (
-  `id` nt(20),
+  `id` int(20),
   `amount` decimal(19,2),
   `name` varchar(255),
   `unit_of_measure` varchar(255),
-  `recipe_id` bigint(20),
+  `recipe_id` int(20),
   PRIMARY KEY (`id`),
   KEY `FKj0s4ywmqqqw4h5iommigh5yja` (`recipe_id`),
   CONSTRAINT `FKj0s4ywmqqqw4h5iommigh5yja` FOREIGN KEY (`recipe_id`) REFERENCES `recipe` (`id`)
