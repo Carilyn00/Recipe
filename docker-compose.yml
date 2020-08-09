@@ -9,6 +9,8 @@ services:
       - '3306:3306'
     environment:
        - 'MYSQL_ROOT_PASSWORD=1234'
+    networks: 
+      - backend
 
    recipe-app:
      build: ./compose/mysql/
@@ -22,3 +24,20 @@ services:
         - 'DB_NAME=recipe-app-db'
         - 'DB_USERNAME=dev'
         - 'DB_PASSWORD=1234'
+      networks: 
+      - backend
+      
+   tomcat: 
+    image: tomcat:9-jre8
+    container_name: tomcat
+    ports:
+      - 8070:8080
+      - 443:443
+    networks:
+      - backend
+    links:
+      - recipe-app
+
+networks:
+  backend:
+    driver: "bridge"
