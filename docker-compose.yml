@@ -1,39 +1,24 @@
 version: '3'
-services:
-  db:
-    container_name: db
-    image: mysql:5.7
-    ports:
-      - "3306:3306"  
-    environment:
-      - MYSQL_ROOT_PASSWORD=rootp
-    volumes: 
-      - ./compose/mysql/data:/var/lib/mysql
-      - ./compose/mysql/init:/docker-entrypoint-initdb.d
-    networks: 
-      - backend
 
-  recipe-app:
-    container_name: recipe-app
+services:
+   db:
     build:
       context: .
-      dockerfile: Dockerfile-alternate
-    ports: 
-      - "8081:8080"
+      dockerfile: Dockerfile
+    ports:
+      - '3306:3306'
     environment:
-      - SPRING_PROFILES_ACTIVE=integration
-      - APP_ID=recipe-app
-      - DB_PORT=3306
-      - DB_HOST=db
-      - DB_NAME=recipe_db_integration
-      #user and password from script here mysql/init/database-init.sql 
-      - DB_USERNAME=dev
-      - DB_PASSWORD=devp
-    links: 
-      - db
-    networks: 
-      - backend
+       - 'MYSQL_ROOT_PASSWORD=1234'
 
-networks:
-  backend:
-    driver: "bridge"
+   recipe-app:
+     build: ./compose/mysql/
+     depends_on:
+        - db
+     ports:
+        - 8090:8080
+     environment:
+        - 'DB_PORT=3306'
+        - 'DB_HOST=db'
+        - 'DB_NAME=recipe-app-db'
+        - 'DB_USERNAME=dev'
+        - 'DB_PASSWORD=1234'
