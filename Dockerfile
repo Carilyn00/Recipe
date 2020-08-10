@@ -1,5 +1,3 @@
-FROM tomcat:8-jre8
-
-DOCKER_HOST tcp://172.31.6.240:2375
+FROM tomcat:9-jre8
 
 ADD target/recipeWebApp.war /usr/local/tomcat/webapps/recipeWebApp.war
