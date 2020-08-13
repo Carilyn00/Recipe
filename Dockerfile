@@ -1,3 +1,3 @@
 FROM tomcat:9-jre8
 
-ADD target/recipeWebApp.war /usr/local/tomcat/webapps/recipeWebApp.war
+COPY target/recipeWebApp.war /usr/local/tomcat/webapps/recipeWebApp.war
